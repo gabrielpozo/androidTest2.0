@@ -4,9 +4,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.gabrielpozoguzman.androidtest20.categories.Category
+import com.example.gabrielpozoguzman.androidtest20.screens.common.ViewMvcFactory
 
-class CategoriesRecyclerAdapter(val inflater: LayoutInflater, var listenerAdapter: ListenerAdapter) : RecyclerView.Adapter<CategoriesRecyclerAdapter.MyViewHolder>(), CategoryListItemViewMvc.ListenerCategoryItem {
-    private var mCategories: ArrayList<Category> = ArrayList()
+class CategoriesRecyclerAdapter(val parent: LayoutInflater, var listenerAdapter: ListenerAdapter, private val viewMvcFactory: ViewMvcFactory) : RecyclerView.Adapter<CategoriesRecyclerAdapter.MyViewHolder>(), CategoryListItemViewMvc.ListenerCategoryItem {
+    private var mCategories: List<Category> = ArrayList()
 
     interface ListenerAdapter {
 
@@ -16,7 +17,7 @@ class CategoriesRecyclerAdapter(val inflater: LayoutInflater, var listenerAdapte
     class MyViewHolder(val mViewMvc: CategoryListItemViewMvc) : RecyclerView.ViewHolder(mViewMvc.getRootView())
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val categoryViewMvc: CategoryListItemViewMvc = CategoryListItemViewMvcImpl(inflater, parent)
+        val categoryViewMvc: CategoryListItemViewMvc = viewMvcFactory.getCategoryListItemViewMvcImpl(parent)
         categoryViewMvc.registerListener(this)
         return MyViewHolder(categoryViewMvc)
     }
@@ -29,7 +30,7 @@ class CategoriesRecyclerAdapter(val inflater: LayoutInflater, var listenerAdapte
         holder.mViewMvc.bindCategory(mCategories.get(position))
     }
 
-    fun bindCategories(categories: ArrayList<Category>) {
+    fun bindCategories(categories: List<Category>) {
         mCategories = categories
         notifyDataSetChanged()
     }

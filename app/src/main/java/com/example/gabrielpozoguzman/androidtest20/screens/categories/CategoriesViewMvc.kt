@@ -1,15 +1,15 @@
 package com.example.gabrielpozoguzman.androidtest20.screens.categories
 
-import android.view.View
 import com.example.gabrielpozoguzman.androidtest20.categories.Category
+import com.example.gabrielpozoguzman.androidtest20.common.BaseObservableViewMvc
+import com.example.gabrielpozoguzman.androidtest20.common.GeneralListener
 
-interface CategoriesViewMvc {
-    interface Listener {
-       fun onCategoriesClicked()
+interface CategoriesViewMvc : BaseObservableViewMvc<CategoriesViewMvc.Listener> {
+    interface Listener{
+        fun onCategoriesClicked()
     }
 
-    fun registerLister(listener: Listener)
-    fun unregisterListener(listener: Listener)
-    fun getRootView(): View
-    fun bindCategories(categories: ArrayList<Category>)
+    fun bindCategories(categories: List<Category>)
+    fun showProgressIndication()
+    fun hideProgressIndication()
 }

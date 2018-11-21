@@ -8,19 +8,24 @@ import com.example.gabrielpozoguzman.androidtest20.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import com.example.gabrielpozoguzman.androidtest20.categories.Category
+import com.example.gabrielpozoguzman.androidtest20.screens.common.ViewMvcFactory
 
-class CategoriesViewMvcImpl(inflater: LayoutInflater, parent: ViewGroup?) : CategoriesViewMvc, CategoriesRecyclerAdapter.ListenerAdapter {
+class CategoriesViewMvcImpl(inflater: LayoutInflater, parent: ViewGroup?, viewMvcFactory: ViewMvcFactory) : CategoriesViewMvc, CategoriesRecyclerAdapter.ListenerAdapter {
+
     private val mRootView: View = inflater.inflate(R.layout.layout_content_frame, parent, false)
 
     private val mRecyclerQuestions: RecyclerView
     private val mAdapter: CategoriesRecyclerAdapter
     private val mListeners = ArrayList<CategoriesViewMvc.Listener>()
+    private val mProgressBar: ProgressBar
 
     init {
         mRecyclerQuestions = findViewById(R.id.recycler_questions)
+        mProgressBar = findViewById(R.id.progress)
         mRecyclerQuestions.layoutManager = LinearLayoutManager(getContext())
-        mAdapter = CategoriesRecyclerAdapter(inflater, this)
+        mAdapter = CategoriesRecyclerAdapter(inflater, this, viewMvcFactory)
         mRecyclerQuestions.adapter = mAdapter
     }
 
@@ -46,10 +51,17 @@ class CategoriesViewMvcImpl(inflater: LayoutInflater, parent: ViewGroup?) : Cate
 
     override fun onCategoryCLicked(category: Category) {
         mListeners.forEach { it.onCategoriesClicked() }
-
     }
 
-    override fun bindCategories(categories: ArrayList<Category>) {
+    override fun bindCategories(categories: List<Category>) {
         mAdapter.bindCategories(categories)
+    }
+
+    override fun showProgressIndication() {
+        mProgressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressIndication() {
+        mProgressBar.visibility = View.GONE
     }
 }

@@ -15,8 +15,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class CategoriesActivity : BaseActivity() {
-    lateinit var mViewMvc: CategoriesViewMvc
-    lateinit var presenter: CategoriesPresenter
+    private lateinit var mViewMvc: CategoriesViewMvc
+    private lateinit var presenter: CategoriesPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

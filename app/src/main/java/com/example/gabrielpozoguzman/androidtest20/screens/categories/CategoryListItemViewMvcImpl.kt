@@ -6,37 +6,24 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.gabrielpozoguzman.androidtest20.R
 import com.example.gabrielpozoguzman.androidtest20.categories.Category
+import com.example.gabrielpozoguzman.androidtest20.common.BaseObservable
 import java.util.ArrayList
 
-class CategoryListItemViewMvcImpl(inflater: LayoutInflater, parent: ViewGroup) : CategoryListItemViewMvc {
-    private val mRootView: View = inflater.inflate(R.layout.layout_category_list_item, parent, false)
+class CategoryListItemViewMvcImpl(inflater: LayoutInflater, parent: ViewGroup) : BaseObservable<CategoryListItemViewMvc.ListenerCategoryItem>(), CategoryListItemViewMvc {
+
     private val mListeners = ArrayList<CategoryListItemViewMvc.ListenerCategoryItem>(1)
     private lateinit var mCategory: Category
-    private val mTxtTitle: TextView by lazy { findViewById(R.id.txt_title) as TextView }
+    private val mTxtTitle: TextView by lazy { findViewById<TextView>(R.id.txt_title) }
 
     init {
         //mTxtTitle = findViewById(R.id.txt_title)
+        setRootView(inflater.inflate(R.layout.layout_category_list_item, parent, false))
+
         getRootView().setOnClickListener {
             for (listener in mListeners) {
                 listener.onCategoryClicked(mCategory)
             }
         }
-    }
-
-    override fun registerListener(listener: CategoryListItemViewMvc.ListenerCategoryItem) {
-        mListeners.add(listener)
-    }
-
-    override fun unregisterListener(listener: CategoryListItemViewMvc.ListenerCategoryItem) {
-        mListeners.add(listener)
-    }
-
-    private fun <T : View> findViewById(id: Int): T {
-        return getRootView().findViewById(id)
-    }
-
-    override fun getRootView(): View {
-        return mRootView
     }
 
     override fun bindCategory(category: Category) {

@@ -2,10 +2,9 @@ package com.example.gabrielpozoguzman.androidtest20.screens.categories
 
 import com.example.gabrielpozoguzman.androidtest20.categories.Category
 import com.example.gabrielpozoguzman.androidtest20.common.BaseObservableViewMvc
-import com.example.gabrielpozoguzman.androidtest20.common.GeneralListener
 
 interface CategoriesViewMvc : BaseObservableViewMvc<CategoriesViewMvc.Listener> {
-    interface Listener{
+    interface Listener {
         fun onCategoriesClicked()
     }
 

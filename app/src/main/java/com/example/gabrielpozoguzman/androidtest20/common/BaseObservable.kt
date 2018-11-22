@@ -3,7 +3,7 @@ package com.example.gabrielpozoguzman.androidtest20.common
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
-abstract class BaseObservable<LISTENER_CLASS> {
+abstract class BaseObservable<LISTENER_CLASS> : BaseMvcView(), BaseObservableViewMvc<LISTENER_CLASS> {
 
     // thread-safe set of listeners
     private val mListeners = Collections.newSetFromMap(
@@ -13,11 +13,11 @@ abstract class BaseObservable<LISTENER_CLASS> {
         get() = Collections.unmodifiableSet(mListeners)
 
 
-    fun registerListener(listener: LISTENER_CLASS) {
+    override fun registerListener(listener: LISTENER_CLASS) {
         mListeners.add(listener)
     }
 
-    fun unregisterListener(listener: LISTENER_CLASS) {
+    override fun unregisterListener(listener: LISTENER_CLASS) {
         mListeners.remove(listener)
     }
 

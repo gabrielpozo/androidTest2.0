@@ -33,6 +33,6 @@ class CategoriesPresenter(val categoriesFetchCategoriesUseCase: FetchCategoriesU
 
     fun bindView(viewMvc: CategoriesViewMvc) {
         mViewMvc = viewMvc
-        mViewMvc.registerLister(this)
+        mViewMvc.registerListener(this)
     }
 }

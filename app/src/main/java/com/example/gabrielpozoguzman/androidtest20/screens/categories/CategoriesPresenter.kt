@@ -3,19 +3,21 @@ package com.example.gabrielpozoguzman.androidtest20.screens.categories
 import com.example.gabrielpozoguzman.androidtest20.categories.Category
 import com.example.gabrielpozoguzman.androidtest20.categories.FetchCategoriesUseCase
 import com.example.gabrielpozoguzman.androidtest20.common.MobgenPresenter
+import com.example.gabrielpozoguzman.androidtest20.common.ScreensNavigator
 
-class CategoriesPresenter(val categoriesFetchCategoriesUseCase: FetchCategoriesUseCase) : MobgenPresenter(), CategoriesViewMvc.Listener
+class CategoriesPresenter(private val categoriesFetchCategoriesUseCase: FetchCategoriesUseCase, private val mScreensNavigator: ScreensNavigator) : MobgenPresenter<CategoriesViewMvc>(), CategoriesViewMvc.Listener
         , FetchCategoriesUseCase.ListenerFetchCategoriesUseCase {
 
-    lateinit var mViewMvc: CategoriesViewMvc
-
     override fun onStart() {
+        mViewMvc.registerListener(this)
         categoriesFetchCategoriesUseCase.registerListener(this)
+
         mViewMvc.showProgressIndication()
         categoriesFetchCategoriesUseCase.fetchCategoriesAndNotify()
     }
 
     override fun onStop() {
+        mViewMvc.unregisterListener(this)
         categoriesFetchCategoriesUseCase.unregisterListener(this)
     }
 
@@ -25,14 +27,10 @@ class CategoriesPresenter(val categoriesFetchCategoriesUseCase: FetchCategoriesU
     }
 
     override fun onCategoriesFetchFailed() {
+
     }
 
     override fun onCategoriesClicked() {
-
-    }
-
-    fun bindView(viewMvc: CategoriesViewMvc) {
-        mViewMvc = viewMvc
-        mViewMvc.registerListener(this)
+        mScreensNavigator.toCategoriesDetails("")
     }
 }

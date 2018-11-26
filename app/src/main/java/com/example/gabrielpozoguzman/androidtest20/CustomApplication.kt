@@ -13,5 +13,4 @@ class CustomApplication : Application() {
         mCompositionRoot = CompositionRoot()
     }
 
-
 }

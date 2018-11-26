@@ -1,6 +1,7 @@
 package com.example.gabrielpozoguzman.androidtest20.screens.categories
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.gabrielpozoguzman.androidtest20.categories.Category

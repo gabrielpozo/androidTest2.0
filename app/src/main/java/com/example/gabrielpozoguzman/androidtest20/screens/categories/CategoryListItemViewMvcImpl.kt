@@ -1,5 +1,6 @@
 package com.example.gabrielpozoguzman.androidtest20.screens.categories
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,6 @@ import java.util.ArrayList
 
 class CategoryListItemViewMvcImpl(inflater: LayoutInflater, parent: ViewGroup) : BaseObservable<CategoryListItemViewMvc.ListenerCategoryItem>(), CategoryListItemViewMvc {
 
-    private val mListeners = ArrayList<CategoryListItemViewMvc.ListenerCategoryItem>(1)
     private lateinit var mCategory: Category
     private val mTxtTitle: TextView by lazy { findViewById<TextView>(R.id.txt_title) }
 
@@ -20,7 +20,7 @@ class CategoryListItemViewMvcImpl(inflater: LayoutInflater, parent: ViewGroup) :
         setRootView(inflater.inflate(R.layout.layout_category_list_item, parent, false))
 
         getRootView().setOnClickListener {
-            for (listener in mListeners) {
+            for (listener in listeners) {
                 listener.onCategoryClicked(mCategory)
             }
         }

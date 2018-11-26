@@ -2,6 +2,7 @@ package com.example.gabrielpozoguzman.androidtest20.screens.categories
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import com.example.gabrielpozoguzman.androidtest20.R
 
 import android.view.LayoutInflater
@@ -16,7 +17,6 @@ class CategoriesViewMvcImpl(inflater: LayoutInflater, parent: ViewGroup?, viewMv
 
     private val mRecyclerQuestions: RecyclerView
     private val mAdapter: CategoriesRecyclerAdapter
-    private val mListeners = ArrayList<CategoriesViewMvc.Listener>()
     private val mProgressBar: ProgressBar
 
     init {
@@ -29,7 +29,8 @@ class CategoriesViewMvcImpl(inflater: LayoutInflater, parent: ViewGroup?, viewMv
     }
 
     override fun onCategoryCLicked(category: Category) {
-        mListeners.forEach { it.onCategoriesClicked() }
+        listeners.forEach {
+            it.onCategoriesClicked() }
     }
 
     override fun bindCategories(categories: List<Category>) {

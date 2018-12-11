@@ -1,28 +1,36 @@
 package com.example.gabrielpozoguzman.androidtest20.screens.categorydetails
 
 import android.os.Bundle
-import com.example.gabrielpozoguzman.androidtest20.screens.common.BaseActivity
-import android.support.v4.view.ViewPager
-import android.util.Log
+import com.example.gabrielpozoguzman.androidtest20.screens.common.controllers.BaseActivity
 import com.example.gabrielpozoguzman.androidtest20.R
-
+import com.example.gabrielpozoguzman.androidtest20.utils.getIntentCategoryDetailValue
+import kotlinx.android.synthetic.main.layout_category_detail.*
 
 class CategoryDetailsActivity : BaseActivity() {
 
-    private lateinit var mViewPager: ViewPager
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.layout_category_detail)
 
-        mViewPager = findViewById(R.id.viewpager)
+        categoriesViewPager?.let { pager ->
+            supportFragmentManager?.let {
+                pager.adapter = CategoriesSlidePageAdapter(it).apply {
+                    addFragment(CategorySlidePageFragment.newInstance(CategoryDetailEnum.FIRST))
+                    addFragment(CategorySlidePageFragment.newInstance(CategoryDetailEnum.SECOND))
+                    addFragment(CategorySlidePageFragment.newInstance(CategoryDetailEnum.THIRD))
+                }
+            }
+        }
 
-        mViewPager.adapter = CategoriesSlidePageAdapter(supportFragmentManager)
+        //val categoryId = getCategoryId()
 
-        //Temporary Fragment
-        mViewPager.currentItem = 1
+        //setCurrentView(categoryId.toInt() - 1)
 
     }
 
+    private fun getCategoryId() = intent.getStringExtra(getIntentCategoryDetailValue())
+
+    private fun setCurrentView(mCurrentItem: Int) {
+        categoriesViewPager.currentItem = mCurrentItem
+    }
 }

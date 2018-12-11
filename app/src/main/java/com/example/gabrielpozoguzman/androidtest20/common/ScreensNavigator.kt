@@ -5,7 +5,7 @@ import com.example.gabrielpozoguzman.androidtest20.utils.categoryDetailIntent
 
 class ScreensNavigator(val context: Context) {
 
-    fun toCategoriesDetails(categoryId: String) {
+    fun toCategoriesDetails(categoryId: Int) {
         context.startActivity(context.categoryDetailIntent(categoryId))
     }
 }

@@ -1,4 +1,4 @@
-package com.example.gabrielpozoguzman.androidtest20.screens.common
+package com.example.gabrielpozoguzman.androidtest20.screens.common.controllers
 
 import android.support.v7.app.AppCompatActivity
 import com.example.gabrielpozoguzman.androidtest20.CustomApplication

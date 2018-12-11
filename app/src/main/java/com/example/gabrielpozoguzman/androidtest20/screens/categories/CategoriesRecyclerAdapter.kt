@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.example.gabrielpozoguzman.androidtest20.categories.Category
 import com.example.gabrielpozoguzman.androidtest20.screens.common.ViewMvcFactory
 
-class CategoriesRecyclerAdapter(val parent: LayoutInflater, var listenerAdapter: ListenerAdapter, private val viewMvcFactory: ViewMvcFactory) : RecyclerView.Adapter<CategoriesRecyclerAdapter.MyViewHolder>(), CategoryListItemViewMvc.ListenerCategoryItem {
+class CategoriesRecyclerAdapter(val parent: LayoutInflater, private var listenerAdapter: ListenerAdapter, private val viewMvcFactory: ViewMvcFactory) : RecyclerView.Adapter<CategoriesRecyclerAdapter.MyViewHolder>(), CategoryListItemViewMvc.ListenerCategoryItem {
     private var mCategories: List<Category> = ArrayList()
 
     interface ListenerAdapter {

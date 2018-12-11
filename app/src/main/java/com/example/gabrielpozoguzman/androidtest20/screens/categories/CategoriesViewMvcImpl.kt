@@ -2,7 +2,6 @@ package com.example.gabrielpozoguzman.androidtest20.screens.categories
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import com.example.gabrielpozoguzman.androidtest20.R
 
 import android.view.LayoutInflater
@@ -30,7 +29,8 @@ class CategoriesViewMvcImpl(inflater: LayoutInflater, parent: ViewGroup?, viewMv
 
     override fun onCategoryCLicked(category: Category) {
         listeners.forEach {
-            it.onCategoriesClicked() }
+            it.onCategoriesClicked(category)
+        }
     }
 
     override fun bindCategories(categories: List<Category>) {

@@ -7,11 +7,18 @@ import com.example.gabrielpozoguzman.androidtest20.categories.FetchCategoriesUse
 import com.example.gabrielpozoguzman.androidtest20.common.ScreensNavigator
 import com.example.gabrielpozoguzman.androidtest20.networking.MobgenApi
 import com.example.gabrielpozoguzman.androidtest20.screens.categories.CategoriesPresenter
+import com.example.gabrielpozoguzman.androidtest20.screens.categorydetails.CategoryDetailsPresenter
+import com.example.gabrielpozoguzman.androidtest20.categories.FetchCategoryDetailUseCase
+import com.example.gabrielpozoguzman.androidtest20.common.coroutines.AsyncTaskManager
+import com.example.gabrielpozoguzman.androidtest20.common.coroutines.CoroutinesManager
+import com.example.gabrielpozoguzman.androidtest20.common.coroutines.DefaultAsyncTasksManager
+import com.example.gabrielpozoguzman.androidtest20.common.coroutines.DefaultCoroutinesManager
+import com.example.gabrielpozoguzman.androidtest20.repository.CategoriesNetworkRepository
 import com.example.gabrielpozoguzman.androidtest20.screens.common.ViewMvcFactory
 
-class ControllerCompositionRoot(val mCompositionRoot: CompositionRoot, val mActivity: Activity) {
+class ControllerCompositionRoot(private val mCompositionRoot: CompositionRoot, private val mActivity: Activity) {
 
-    fun getMobgenApi(): MobgenApi {
+    private fun getMobgenApi(): MobgenApi {
         return mCompositionRoot.getMobgenApi()
     }
 
@@ -27,15 +34,35 @@ class ControllerCompositionRoot(val mCompositionRoot: CompositionRoot, val mActi
         return ViewMvcFactory(getLayoutInflater())
     }
 
-    fun getFetchCategoriesUseCase(): FetchCategoriesUseCase {
+    private fun getFetchCategoriesUseCase(): FetchCategoriesUseCase {
         return FetchCategoriesUseCase(getMobgenApi())
     }
 
-    fun getScreensNavigator(): ScreensNavigator {
+    private fun getFetchCategoryDetailUseCase(): FetchCategoryDetailUseCase {
+        return FetchCategoryDetailUseCase(getCategoriesNetworkRepository(), getAsyncTaskManager())
+    }
+
+    private fun getCategoriesNetworkRepository(): CategoriesNetworkRepository {
+        return CategoriesNetworkRepository(getMobgenApi())
+    }
+
+    private fun getScreensNavigator(): ScreensNavigator {
         return ScreensNavigator(getContext())
     }
 
+    private fun getAsyncTaskManager(): AsyncTaskManager {
+        return DefaultAsyncTasksManager()
+    }
+
     fun getCategoriesPresenter(): CategoriesPresenter {
-        return CategoriesPresenter(getFetchCategoriesUseCase(), getScreensNavigator())
+        return CategoriesPresenter(getFetchCategoriesUseCase(), getScreensNavigator(), getCoroutinesManager())
+    }
+
+    fun getCategoryDetailsPresenter(): CategoryDetailsPresenter {
+        return CategoryDetailsPresenter(getFetchCategoryDetailUseCase(), getCoroutinesManager())
+    }
+
+    private fun getCoroutinesManager(): CoroutinesManager {
+        return DefaultCoroutinesManager()
     }
 }

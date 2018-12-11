@@ -4,8 +4,9 @@ import com.example.gabrielpozoguzman.androidtest20.categories.Category
 import com.example.gabrielpozoguzman.androidtest20.categories.FetchCategoriesUseCase
 import com.example.gabrielpozoguzman.androidtest20.common.MobgenPresenter
 import com.example.gabrielpozoguzman.androidtest20.common.ScreensNavigator
+import com.example.gabrielpozoguzman.androidtest20.common.coroutines.CoroutinesManager
 
-class CategoriesPresenter(private val categoriesFetchCategoriesUseCase: FetchCategoriesUseCase, private val mScreensNavigator: ScreensNavigator) : MobgenPresenter<CategoriesViewMvc>(), CategoriesViewMvc.Listener
+class CategoriesPresenter(private val categoriesFetchCategoriesUseCase: FetchCategoriesUseCase, private val mScreensNavigator: ScreensNavigator, coroutinesManager: CoroutinesManager) : MobgenPresenter<CategoriesViewMvc>(coroutinesManager), CategoriesViewMvc.Listener
         , FetchCategoriesUseCase.ListenerFetchCategoriesUseCase {
 
     override fun onStart() {
@@ -23,14 +24,14 @@ class CategoriesPresenter(private val categoriesFetchCategoriesUseCase: FetchCat
 
     override fun onCategoriesFetched(categories: List<Category>) {
         mViewMvc.hideProgressIndication()
-        mViewMvc.bindCategories(categories.sortedWith(compareBy { it.title }))
+        mViewMvc.bindCategories(categories)
     }
 
     override fun onCategoriesFetchFailed() {
 
     }
 
-    override fun onCategoriesClicked() {
-        mScreensNavigator.toCategoriesDetails("")
+    override fun onCategoriesClicked(category: Category) {
+        mScreensNavigator.toCategoriesDetails(category.id)
     }
 }

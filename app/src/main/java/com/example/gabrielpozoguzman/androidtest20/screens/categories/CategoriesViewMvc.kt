@@ -5,7 +5,7 @@ import com.example.gabrielpozoguzman.androidtest20.common.BaseObservableViewMvc
 
 interface CategoriesViewMvc : BaseObservableViewMvc<CategoriesViewMvc.Listener> {
     interface Listener {
-        fun onCategoriesClicked()
+        fun onCategoriesClicked(category: Category)
     }
 
     fun bindCategories(categories: List<Category>)

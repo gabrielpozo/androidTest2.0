@@ -1,9 +1,10 @@
 package com.example.gabrielpozoguzman.androidtest20.screens.categorydetails
 
-import android.util.Log
 import com.example.gabrielpozoguzman.androidtest20.categories.FetchCategoryDetailUseCase
 import com.example.gabrielpozoguzman.androidtest20.common.MobgenPresenter
 import com.example.gabrielpozoguzman.androidtest20.common.coroutines.CoroutinesManager
+import kotlinx.coroutines.delay
+
 
 class CategoryDetailsPresenter(private val fetchCategoryDetailType: FetchCategoryDetailUseCase, coroutinesManager: CoroutinesManager) : MobgenPresenter<CategoriesDetailsViewMvc>(coroutinesManager) {
 
@@ -14,10 +15,10 @@ class CategoryDetailsPresenter(private val fetchCategoryDetailType: FetchCategor
 
     private fun launchCategoryDetails() {
         launchOnUITryCatch({
-            val categoryDetailItem = fetchCategoryDetailType.execute(mViewMvc.categoryId)
+            val categoryDetailItems = fetchCategoryDetailType.execute(mViewMvc.categoryId)
+            delay(8000)
             mViewMvc.hideProgressIndication()
-            mViewMvc.bindCategoriesDetails(categoryDetailItem)
-
+            mViewMvc.bindCategoriesDetails(categoryDetailItems)
         }, {
             mViewMvc.hideProgressIndication()
             mViewMvc.showErrorDialog()
@@ -26,6 +27,11 @@ class CategoryDetailsPresenter(private val fetchCategoryDetailType: FetchCategor
     }
 
     override fun onStop() {
-        //fetchCategoryDetailType.unregisterListener(this)
+        cancelAllCoroutinesManager()
+        fetchCategoryDetailType.cleanup()
+    }
+
+    override fun onDestroy() {
+
     }
 }

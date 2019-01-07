@@ -22,5 +22,5 @@ interface CoroutinesManager {
             finallyBlock: suspend CoroutineScope.() -> Unit,
             suppressCancellationException: Boolean = false)
 
-    fun cancelAllCoroutines()
+    fun cancelAllCoroutinesManager()
 }

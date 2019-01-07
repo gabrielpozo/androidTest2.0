@@ -1,6 +1,5 @@
 package com.example.gabrielpozoguzman.androidtest20.screens.categorydetails
 
-import com.example.gabrielpozoguzman.androidtest20.categories.CategoryDetailSchemaItem
 import com.example.gabrielpozoguzman.androidtest20.categories.CategoryDetailType
 import com.example.gabrielpozoguzman.androidtest20.common.ViewMvc
 

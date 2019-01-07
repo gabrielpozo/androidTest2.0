@@ -12,7 +12,7 @@ interface MobgenApi {
     fun getCategories(): Call<List<Category>>
 
     @GET(Constants.categories)
-    fun getCategories2(): Call<List<Category>>
+    fun getCategories2(): Deferred<List<Category>>
 
     @GET(Constants.categoriesBook)
     fun getCategoryListBook(): Deferred<List<CategorySchemaBook>>

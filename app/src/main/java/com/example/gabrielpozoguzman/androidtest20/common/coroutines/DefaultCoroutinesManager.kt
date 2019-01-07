@@ -3,10 +3,7 @@ package com.example.gabrielpozoguzman.androidtest20.common.coroutines
 import com.example.gabrielpozoguzman.androidtest20.utils.CoroutinesUtils.Companion.tryCatch
 import com.example.gabrielpozoguzman.androidtest20.utils.CoroutinesUtils.Companion.tryCatchFinally
 import com.example.gabrielpozoguzman.androidtest20.utils.CoroutinesUtils.Companion.tryFinally
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 class DefaultCoroutinesManager : CoroutinesManager, CoroutineScope {
@@ -49,9 +46,8 @@ class DefaultCoroutinesManager : CoroutinesManager, CoroutineScope {
     }
 
     @Synchronized
-    override fun cancelAllCoroutines() {
+    override fun cancelAllCoroutinesManager() {
         val coroutinesJobsSize = coroutinesJobs.size
-
         if (coroutinesJobsSize > 0) {
             for (i in coroutinesJobsSize - 1 downTo 0) {
                 coroutinesJobs[i].cancel()

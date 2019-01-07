@@ -7,6 +7,7 @@ abstract class MobgenPresenter<ViewMvcType : Any>(coroutinesManager: CoroutinesM
     lateinit var mViewMvc: ViewMvcType
     abstract override fun onStart()
     abstract override fun onStop()
+    abstract override fun onDestroy()
     override fun bindView(viewMvc: ViewMvcType) {
         mViewMvc = viewMvc
     }

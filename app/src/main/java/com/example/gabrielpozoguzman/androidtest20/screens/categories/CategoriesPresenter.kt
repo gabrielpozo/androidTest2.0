@@ -34,4 +34,9 @@ class CategoriesPresenter(private val categoriesFetchCategoriesUseCase: FetchCat
     override fun onCategoriesClicked(category: Category) {
         mScreensNavigator.toCategoriesDetails(category.id)
     }
+
+    override fun onDestroy() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
 }

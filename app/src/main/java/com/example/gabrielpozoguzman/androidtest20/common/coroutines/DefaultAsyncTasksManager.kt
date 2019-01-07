@@ -1,11 +1,10 @@
 package com.example.gabrielpozoguzman.androidtest20.common.coroutines
 
 import android.support.annotation.CallSuper
-import android.util.Log
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class DefaultAsyncTasksManager: AsyncTaskManager, CoroutineScope {
+class DefaultAsyncTasksManager : AsyncTaskManager, CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.IO
 
@@ -14,9 +13,7 @@ class DefaultAsyncTasksManager: AsyncTaskManager, CoroutineScope {
     @CallSuper
     @Synchronized
     override suspend fun <T> asyncTask(block: suspend CoroutineScope.() -> T): Deferred<T> {
-        val deferred: Deferred<T> = async {
-            Log.d("Gabriel","async Task Thread: ${Thread.currentThread().name}")
-            block() }
+        val deferred: Deferred<T> = async { block() }
         deferredObjects.add(deferred)
         deferred.invokeOnCompletion { deferredObjects.remove(deferred) }
         return deferred

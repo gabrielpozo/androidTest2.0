@@ -4,11 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.gabrielpozoguzman.androidtest20.screens.common.ViewMvcFactory
 import com.example.gabrielpozoguzman.androidtest20.screens.common.controllers.BaseFragment
+import javax.inject.Inject
 
 class CategorySlidePageFragment : BaseFragment() {
 
+    @Inject
     lateinit var presenter: CategoryDetailsPresenter
+    @Inject
+    lateinit var viewMvcFactory: ViewMvcFactory
+
+
     lateinit var mViewMvc: CategoriesDetailsViewMvc
 
     companion object {
@@ -23,8 +30,8 @@ class CategorySlidePageFragment : BaseFragment() {
             parent: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        presenter = getControllerCompositionRoot().getCategoryDetailsPresenter()
-        mViewMvc = getControllerCompositionRoot().getViewMvcFactory().getCategoryDetailsViewMvc(parent)
+        getPresentationComponent().inject(this)
+        mViewMvc = viewMvcFactory.getCategoryDetailsViewMvc(parent)
         mViewMvc.categoryId = "book"
         presenter.bindView(mViewMvc)
 

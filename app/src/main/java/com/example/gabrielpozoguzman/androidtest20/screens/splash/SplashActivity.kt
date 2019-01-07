@@ -14,6 +14,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 class SplashActivity : BaseActivity() {
@@ -27,7 +28,8 @@ class SplashActivity : BaseActivity() {
     private var mDelayHandler: Handler? = null
     private val SPLASH_DELAY: Long = 1500 //1.5 seconds
 
-    private lateinit var fetchCategoriesUseCase2: FetchCategoriesUseCase2
+    @Inject
+    lateinit var fetchCategoriesUseCase2: FetchCategoriesUseCase2
 
     private val mRunnable: Runnable = Runnable {
         if (!isFinishing) {
@@ -43,9 +45,8 @@ class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-
-        fetchCategoriesUseCase2 = getControllerCompositionRoot().getFetchCategoriesUseCase2()
-
+        getPresentationComponent().inject(this)
+        
         //Initialize the Handler
         mDelayHandler = Handler()
 

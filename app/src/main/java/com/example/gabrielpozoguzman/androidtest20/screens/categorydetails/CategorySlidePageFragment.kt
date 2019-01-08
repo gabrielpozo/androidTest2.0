@@ -9,19 +9,17 @@ import com.example.gabrielpozoguzman.androidtest20.screens.common.controllers.Ba
 import javax.inject.Inject
 
 class CategorySlidePageFragment : BaseFragment() {
-
     @Inject
     lateinit var presenter: CategoryDetailsPresenter
     @Inject
     lateinit var viewMvcFactory: ViewMvcFactory
-
 
     lateinit var mViewMvc: CategoriesDetailsViewMvc
 
     companion object {
         private const val FRAGMENT_DETAIL = "fragment_detail_page"
         fun newInstance(categoryDetailEnum: CategoryDetailEnum) = CategorySlidePageFragment().apply {
-            arguments = Bundle().apply { putSerializable(FRAGMENT_DETAIL, categoryDetailEnum) }
+            arguments = Bundle().apply { putSerializable(FRAGMENT_DETAIL, categoryDetailEnum.categoryName) }
         }
     }
 
@@ -32,7 +30,7 @@ class CategorySlidePageFragment : BaseFragment() {
     ): View {
         getPresentationComponent().inject(this)
         mViewMvc = viewMvcFactory.getCategoryDetailsViewMvc(parent)
-        mViewMvc.categoryId = "book"
+        mViewMvc.categoryId = getCategoryDetailArgument()
         presenter.bindView(mViewMvc)
 
         return mViewMvc.getRootView()
@@ -43,12 +41,16 @@ class CategorySlidePageFragment : BaseFragment() {
         presenter.onStart()
     }
 
+    private fun getCategoryDetailArgument(): String {
+        return arguments?.getString(FRAGMENT_DETAIL) ?: "book"
+    }
+
     override fun onStop() {
         super.onStop()
         presenter.onStop()
     }
 }
 
-enum class CategoryDetailEnum {
-    FIRST, SECOND, THIRD
+enum class CategoryDetailEnum(val categoryName: String) {
+    BOOK("book"), CHARACTER("character"), HOUSE("house")
 }

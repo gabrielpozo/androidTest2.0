@@ -16,7 +16,6 @@ class CategoryDetailsPresenter(private val fetchCategoryDetailType: FetchCategor
     private fun launchCategoryDetails() {
         launchOnUITryCatch({
             val categoryDetailItems = fetchCategoryDetailType.execute(mViewMvc.categoryId)
-            delay(8000)
             mViewMvc.hideProgressIndication()
             mViewMvc.bindCategoriesDetails(categoryDetailItems)
         }, {

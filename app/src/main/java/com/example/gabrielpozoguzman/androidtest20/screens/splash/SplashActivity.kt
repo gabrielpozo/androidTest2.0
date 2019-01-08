@@ -46,7 +46,7 @@ class SplashActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         getPresentationComponent().inject(this)
-        
+
         //Initialize the Handler
         mDelayHandler = Handler()
 
@@ -56,7 +56,6 @@ class SplashActivity : BaseActivity() {
     }
 
     public override fun onDestroy() {
-
         if (mDelayHandler != null) {
             mDelayHandler!!.removeCallbacks(mRunnable)
         }

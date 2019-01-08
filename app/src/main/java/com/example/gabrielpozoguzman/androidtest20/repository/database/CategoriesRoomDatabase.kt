@@ -4,6 +4,7 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
+import android.util.Log
 import com.example.gabrielpozoguzman.androidtest20.categories.Category
 
 @Database(entities = [Category::class], version = 1)
@@ -17,6 +18,7 @@ abstract class CategoriesRoomDatabase : RoomDatabase() {
         fun getDatabase(context: Context): CategoriesRoomDatabase {
             return INSTANCE ?: synchronized(this) {
                 // Create database here
+                Log.d("Gabriel", "Create database here")
                 val instance = Room.databaseBuilder(
                         context.applicationContext,
                         CategoriesRoomDatabase::class.java,

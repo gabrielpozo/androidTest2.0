@@ -2,13 +2,10 @@ package com.example.gabrielpozoguzman.androidtest20.common.dependencyinjection.p
 
 import android.content.Context
 import android.view.LayoutInflater
-import com.example.gabrielpozoguzman.androidtest20.categories.CategoriesUseRepository
 import com.example.gabrielpozoguzman.androidtest20.categories.FetchCategoriesUseCase
-import com.example.gabrielpozoguzman.androidtest20.categories.FetchCategoriesUseCase2
 import com.example.gabrielpozoguzman.androidtest20.common.ScreensNavigator
 import com.example.gabrielpozoguzman.androidtest20.common.coroutines.*
 import com.example.gabrielpozoguzman.androidtest20.networking.MobgenApi
-import com.example.gabrielpozoguzman.androidtest20.repository.CategoriesNetworkRepository
 import com.example.gabrielpozoguzman.androidtest20.screens.categories.CategoriesPresenter
 import com.example.gabrielpozoguzman.androidtest20.screens.common.ViewMvcFactory
 import dagger.Module
@@ -24,14 +21,14 @@ class CategoriesModule(val mActivity: Context) {
 
     @Provides
     fun getViewMvcFactory(layoutInflater: LayoutInflater): ViewMvcFactory {
-        return ViewMvcFactory(layoutInflater) //return getCategoryListItemViewMvcImpl --> CategoryListItemViewMvcImpl(mLayoutInflater, parent, navigationDrawer, getImageLoader())
+        return ViewMvcFactory(layoutInflater)
     }
 
     @Provides
     fun getScreensNavigator(): ScreensNavigator {
         return ScreensNavigator(mActivity)
     }
-    /****/
+
     @Provides
     fun getCategoriesPresenter(fetchCategoriesUseCase: FetchCategoriesUseCase, screensNavigator: ScreensNavigator, coroutinesManager: CoroutinesManager): CategoriesPresenter {
         return CategoriesPresenter(fetchCategoriesUseCase, screensNavigator, coroutinesManager)
@@ -41,7 +38,5 @@ class CategoriesModule(val mActivity: Context) {
     fun getFetchCategoriesUseCase(mobgenApi: MobgenApi): FetchCategoriesUseCase {
         return FetchCategoriesUseCase(mobgenApi)
     }
-
-    /*****/
 
 }

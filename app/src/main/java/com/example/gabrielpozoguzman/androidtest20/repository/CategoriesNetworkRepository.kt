@@ -14,7 +14,7 @@ class CategoriesNetworkRepository(private val mobgenApi: MobgenApi) {
     suspend fun getCategoryDetailsList(categoryId: String): List<CategoryDetailSchemaItem> {
         return when (categoryId) {
             CategoryDetailType.BOOK -> mobgenApi.getCategoryListBook().await()
-            CategoryDetailType.CHARACTER -> mobgenApi.getCategoryListHouse().await()
+            CategoryDetailType.CHARACTER -> mobgenApi.getCategoryListCharacter().await()
             CategoryDetailType.HOUSE -> mobgenApi.getCategoryListHouse().await()
             else -> mobgenApi.getCategoryListBook().await()
         }

@@ -6,8 +6,11 @@ import com.example.gabrielpozoguzman.androidtest20.repository.CategoriesNetworkR
 
 class FetchCategoriesUseCase2(private val categoriesNetworkRepository: CategoriesNetworkRepository, private val categoriesRepository: CategoriesUseRepository, asyncTaskManager: AsyncTaskManager) : BaseUseCase(asyncTaskManager) {
     suspend fun execute(): List<Category> = asyncAwait {
-        categoriesNetworkRepository.getCategories().apply {
-            this.forEach { categoriesRepository.insert(it) }
-        }
+        //if(firstRun) {
+            categoriesNetworkRepository.getCategories().apply {
+                //delay(10000)
+                this.forEach { categoriesRepository.insert(it) }
+            }
+        //}
     }
 }

@@ -1,20 +1,30 @@
 package com.example.gabrielpozoguzman.androidtest20.screens.categorydetails
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
+import android.arch.paging.PagedList
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.gabrielpozoguzman.androidtest20.categories.CategoryDetailType
+import com.example.gabrielpozoguzman.androidtest20.common.viewmodel.ViewModelFactory
 import com.example.gabrielpozoguzman.androidtest20.screens.common.ViewMvcFactory
 import com.example.gabrielpozoguzman.androidtest20.screens.common.controllers.BaseFragment
+import dagger.Binds
 import javax.inject.Inject
 
 class CategorySlidePageFragment : BaseFragment() {
     @Inject
-    lateinit var presenter: CategoryDetailsPresenter
+    lateinit var viewModelFactory: ViewModelFactory
     @Inject
     lateinit var viewMvcFactory: ViewMvcFactory
 
     lateinit var mViewMvc: CategoriesDetailsViewMvc
+
+    private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory).get(CategoryDetailsViewModel::class.java) }
+
 
     companion object {
         private const val FRAGMENT_DETAIL = "fragment_detail_page"
@@ -30,24 +40,24 @@ class CategorySlidePageFragment : BaseFragment() {
     ): View {
         getPresentationComponent().inject(this)
         mViewMvc = viewMvcFactory.getCategoryDetailsViewMvc(parent)
-        mViewMvc.categoryId = getCategoryDetailArgument()
-        presenter.bindView(mViewMvc)
 
+        viewModel.loadCategoriesDataNow(getCategoryDetailArgument())
+
+        viewModel.categoriesList.observe(this, Observer<PagedList<CategoryDetailType>> { categories ->
+            categories?.let {
+                mViewMvc.bindCategoriesDetails(it)
+            }
+        })
+
+        viewModel.getState().observe(this, Observer {
+
+
+        })
         return mViewMvc.getRootView()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        presenter.onStart()
     }
 
     private fun getCategoryDetailArgument(): String {
         return arguments?.getString(FRAGMENT_DETAIL) ?: "book"
-    }
-
-    override fun onStop() {
-        super.onStop()
-        presenter.onStop()
     }
 }
 

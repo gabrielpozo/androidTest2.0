@@ -7,9 +7,9 @@ import com.example.gabrielpozoguzman.androidtest20.screens.categories.Categories
 import com.example.gabrielpozoguzman.androidtest20.screens.categories.CategoryListItemViewMvc
 import com.example.gabrielpozoguzman.androidtest20.screens.categories.CategoryListItemViewMvcImpl
 import com.example.gabrielpozoguzman.androidtest20.screens.categorydetails.CategoriesDetailsViewMvc
-import com.example.gabrielpozoguzman.androidtest20.screens.categorydetails.category_items.CategoryDetailsItemViewMvc
+import com.example.gabrielpozoguzman.androidtest20.screens.categorydetails.categoryitems.CategoryDetailsItemViewMvc
 import com.example.gabrielpozoguzman.androidtest20.screens.categorydetails.CategoryDetailsViewMvcImpl
-import com.example.gabrielpozoguzman.androidtest20.screens.categorydetails.category_items.*
+import com.example.gabrielpozoguzman.androidtest20.screens.categorydetails.categoryitems.*
 
 
 class ViewMvcFactory(private val mLayoutInflater: LayoutInflater) {

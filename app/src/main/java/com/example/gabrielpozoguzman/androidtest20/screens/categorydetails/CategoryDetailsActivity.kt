@@ -1,7 +1,6 @@
 package com.example.gabrielpozoguzman.androidtest20.screens.categorydetails
 
 import android.os.Bundle
-import android.util.Log
 import com.example.gabrielpozoguzman.androidtest20.screens.common.controllers.BaseActivity
 import com.example.gabrielpozoguzman.androidtest20.R
 import com.example.gabrielpozoguzman.androidtest20.utils.getIntentCategoryDetailValue

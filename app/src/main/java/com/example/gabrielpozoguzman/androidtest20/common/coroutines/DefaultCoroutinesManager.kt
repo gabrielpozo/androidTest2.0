@@ -29,14 +29,6 @@ class DefaultCoroutinesManager : CoroutinesManager, CoroutineScope {
     }
 
     @Synchronized
-     fun launchOnUITryCatch2(
-            tryBlock: suspend CoroutineScope.() -> Unit,
-            catchBlock: suspend CoroutineScope.(Throwable) -> Unit,
-            handleCancellationExceptionManually: Boolean) {
-        launchOnUI { tryCatch(tryBlock, catchBlock, handleCancellationExceptionManually) }
-    }
-
-    @Synchronized
     override fun launchOnUITryCatchFinally(
             tryBlock: suspend CoroutineScope.() -> Unit,
             catchBlock: suspend CoroutineScope.(Throwable) -> Unit,

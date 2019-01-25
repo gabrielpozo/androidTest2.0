@@ -15,9 +15,9 @@ class CategoryDetailsPresenter(private val fetchCategoryDetailType: FetchCategor
 
     private fun launchCategoryDetails() {
         launchOnUITryCatch({
-            val categoryDetailItems = fetchCategoryDetailType.execute(mViewMvc.categoryId)
+          //  val categoryDetailItems = fetchCategoryDetailType.execute(mViewMvc.categoryId)
             mViewMvc.hideProgressIndication()
-            mViewMvc.bindCategoriesDetails(categoryDetailItems)
+            //mViewMvc.bindCategoriesDetails(categoryDetailItems)
         }, {
             mViewMvc.hideProgressIndication()
             mViewMvc.showErrorDialog()
@@ -27,7 +27,7 @@ class CategoryDetailsPresenter(private val fetchCategoryDetailType: FetchCategor
 
     override fun onStop() {
         cancelAllCoroutinesManager()
-        fetchCategoryDetailType.cleanup()
+        //fetchCategoryDetailType.cleanup()
     }
 
     override fun onDestroy() {

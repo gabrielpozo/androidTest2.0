@@ -2,6 +2,7 @@ package com.example.gabrielpozoguzman.androidtest20.common.dependencyinjection.a
 
 import android.content.Context
 import com.example.gabrielpozoguzman.androidtest20.categories.CategoriesUseRepository
+import com.example.gabrielpozoguzman.androidtest20.common.coroutines.AsyncTaskManager
 import com.example.gabrielpozoguzman.androidtest20.repository.database.CategoriesRoomDatabase
 import com.example.gabrielpozoguzman.androidtest20.repository.database.CategoryDao
 import dagger.Module
@@ -17,8 +18,8 @@ class ApplicationDatabaseModule(val context: Context) {
     }
 
     @Provides
-    fun getCategoriesUseRepository(categoryDao: CategoryDao): CategoriesUseRepository {
-        return CategoriesUseRepository(categoryDao)
+    fun getCategoriesUseRepository(categoryDao: CategoryDao, asyncTaskManager: AsyncTaskManager): CategoriesUseRepository {
+        return CategoriesUseRepository(categoryDao, asyncTaskManager)
     }
 
 }

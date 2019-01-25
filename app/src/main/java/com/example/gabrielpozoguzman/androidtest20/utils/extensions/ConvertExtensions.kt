@@ -7,7 +7,7 @@ fun List<CategoryDetailSchemaItem>.convertToCategoryDetailModel(categoryId: Stri
     when (categoryId) {
         CategoryDetailType.BOOK -> {
             forEach {
-                categoryDetailType.add(CategoryBook((it as CategorySchemaBook).authors, it.country, it.isbn, it.name, it.mediaType, it.numberPages, it.released))
+                categoryDetailType.add(CategoryBook((it as CategorySchemaBook).authors, it.country, it.isbn, it.name, it.mediaType, it.numberOfPages, it.released))
             }
         }
         CategoryDetailType.HOUSE -> {
@@ -22,9 +22,10 @@ fun List<CategoryDetailSchemaItem>.convertToCategoryDetailModel(categoryId: Stri
         }
         else -> {
             forEach {
-                categoryDetailType.add(CategoryBook((it as CategorySchemaBook).authors, it.country, it.isbn, it.name, it.mediaType, it.numberPages, it.released))
+                categoryDetailType.add(CategoryBook((it as CategorySchemaBook).authors, it.country, it.isbn, it.name, it.mediaType, it.numberOfPages, it.released))
             }
         }
     }
     return categoryDetailType
 }
+

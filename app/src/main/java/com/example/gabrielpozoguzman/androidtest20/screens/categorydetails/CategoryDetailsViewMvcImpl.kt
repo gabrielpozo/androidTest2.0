@@ -1,7 +1,9 @@
 package com.example.gabrielpozoguzman.androidtest20.screens.categorydetails
 
+import android.arch.paging.PagedList
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +18,7 @@ class CategoryDetailsViewMvcImpl(inflater: LayoutInflater, parent: ViewGroup?, v
 
     override lateinit var categoryId: String
     private val mRecyclerQuestions: RecyclerView
-    private val mAdapter: CategoriesDetailAdapter
+    val mAdapter: CategoriesDetailAdapter
     private val mProgressBar: ProgressBar
 
 
@@ -29,8 +31,11 @@ class CategoryDetailsViewMvcImpl(inflater: LayoutInflater, parent: ViewGroup?, v
         mRecyclerQuestions.adapter = mAdapter
     }
 
-    override fun bindCategoriesDetails(categoriesDetailType: List<CategoryDetailType>) {
-        mAdapter.bindCategories(categoriesDetailType)
+    override fun bindCategoriesDetails(categoriesDetailType: PagedList<CategoryDetailType>) {
+        /***
+         * To change and submit
+         */
+        mAdapter.submitList(categoriesDetailType)
     }
 
     override fun showProgressIndication() {
@@ -40,6 +45,7 @@ class CategoryDetailsViewMvcImpl(inflater: LayoutInflater, parent: ViewGroup?, v
     override fun hideProgressIndication() {
         mProgressBar.visibility = View.GONE
     }
+
     override fun showErrorDialog() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

@@ -1,4 +1,4 @@
-package com.example.gabrielpozoguzman.androidtest20.screens.categorydetails.category_items
+package com.example.gabrielpozoguzman.androidtest20.screens.categorydetails.categoryitems
 
 import com.example.gabrielpozoguzman.androidtest20.categories.CategoryDetailType
 import com.example.gabrielpozoguzman.androidtest20.common.ViewMvc

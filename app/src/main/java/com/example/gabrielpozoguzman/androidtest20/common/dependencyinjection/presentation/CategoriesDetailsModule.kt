@@ -18,8 +18,8 @@ class CategoriesDetailsModule {
 
 
     @Provides
-    fun getFetchCategoryDetailUseCase(categoriesNetworkRepository: CategoriesNetworkRepository, asyncTaskManager: AsyncTaskManager): FetchCategoryDetailUseCase {
-        return FetchCategoryDetailUseCase(categoriesNetworkRepository, asyncTaskManager)
+    fun getFetchCategoryDetailUseCase(categoriesNetworkRepository: CategoriesNetworkRepository): FetchCategoryDetailUseCase {
+        return FetchCategoryDetailUseCase(categoriesNetworkRepository)
     }
 
 }

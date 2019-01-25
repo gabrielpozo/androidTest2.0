@@ -3,6 +3,7 @@ package com.example.gabrielpozoguzman.androidtest20.common.dependencyinjection.p
 import com.example.gabrielpozoguzman.androidtest20.categories.CategoriesUseRepository
 import com.example.gabrielpozoguzman.androidtest20.categories.FetchCategoriesUseCase2
 import com.example.gabrielpozoguzman.androidtest20.common.coroutines.AsyncTaskManager
+import com.example.gabrielpozoguzman.androidtest20.common.coroutines.CoroutinesManager
 import com.example.gabrielpozoguzman.androidtest20.repository.CategoriesNetworkRepository
 import dagger.Module
 import dagger.Provides
@@ -11,8 +12,8 @@ import dagger.Provides
 class SplashModule {
 
     @Provides
-    fun getFetchCategoriesUseCase2(categoriesNetworkRepository: CategoriesNetworkRepository, categoriesUseRepository: CategoriesUseRepository, asyncTaskManager: AsyncTaskManager): FetchCategoriesUseCase2 {
-        return FetchCategoriesUseCase2(categoriesNetworkRepository, categoriesUseRepository, asyncTaskManager)
+    fun getFetchCategoriesUseCase2(categoriesNetworkRepository: CategoriesNetworkRepository, categoriesUseRepository: CategoriesUseRepository, coroutinesManager: CoroutinesManager): FetchCategoriesUseCase2 {
+        return FetchCategoriesUseCase2(categoriesNetworkRepository, categoriesUseRepository, coroutinesManager)
     }
 
 

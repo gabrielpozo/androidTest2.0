@@ -6,6 +6,7 @@ import kotlinx.coroutines.Deferred
 import retrofit2.Call
 
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface MobgenApi {
     @GET(Constants.categories)
@@ -14,13 +15,15 @@ interface MobgenApi {
     @GET(Constants.categories)
     fun getCategories2(): Deferred<List<Category>>
 
+    @GET(Constants.categories)
+    fun getCategoriesImpl(): Call<List<Category>>
+
     @GET(Constants.categoriesBook)
-    fun getCategoryListBook(): Deferred<List<CategorySchemaBook>>
+    fun getCategoryListBook(@Query("_page") page: String, @Query("_limit") limit: String): Call<List<CategorySchemaBook>>
 
     @GET(Constants.categoriesHouse)
-    fun getCategoryListHouse(): Deferred<List<CategorySchemaHouse>>
+    fun getCategoryListHouse(@Query("_page") page: String, @Query("_limit") limit: String): Call<List<CategorySchemaHouse>>
 
     @GET(Constants.categoriesCharacter)
-    fun getCategoryListCharacter(): Deferred<List<CategorySchemaCharacter>>
-
+    fun getCategoryListCharacter(@Query("_page") page: String, @Query("_limit") limit: String): Call<List<CategorySchemaCharacter>>
 }

@@ -3,6 +3,7 @@ package com.example.gabrielpozoguzman.androidtest20.screens.splash
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.support.v4.os.HandlerCompat.postDelayed
 import android.util.Log
 import com.example.gabrielpozoguzman.androidtest20.R
 import com.example.gabrielpozoguzman.androidtest20.categories.CategoriesUseRepository
@@ -35,9 +36,15 @@ class SplashActivity : BaseActivity() {
         if (!isFinishing) {
             val intent = Intent(applicationContext, CategoriesActivity::class.java)
             scope.launch {
-                fetchCategoriesUseCase2.execute()
-                startActivity(intent)
-                finish()
+                //fetchCategoriesUseCase2.execute()
+                fetchCategoriesUseCase2.execute(onSuccess = {
+                    startActivity(intent)
+                    finish()
+
+                }, onError = {
+
+                })
+
             }
         }
     }
@@ -51,15 +58,13 @@ class SplashActivity : BaseActivity() {
         mDelayHandler = Handler()
 
         //Navigate with delay
-        mDelayHandler!!.postDelayed(mRunnable, SPLASH_DELAY)
+        mDelayHandler?.postDelayed(mRunnable, SPLASH_DELAY)
 
     }
 
     public override fun onDestroy() {
-        if (mDelayHandler != null) {
-            mDelayHandler!!.removeCallbacks(mRunnable)
-        }
-        fetchCategoriesUseCase2.cleanup()
+        mDelayHandler?.removeCallbacks(mRunnable)
+        fetchCategoriesUseCase2.cancelAllCoroutinesManager()
         parentJob.cancel()
         super.onDestroy()
     }

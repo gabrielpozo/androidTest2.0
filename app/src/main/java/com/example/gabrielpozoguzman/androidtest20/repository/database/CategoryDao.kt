@@ -6,6 +6,7 @@ import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import com.example.gabrielpozoguzman.androidtest20.categories.Category
+
 @Dao
 interface CategoryDao {
     @Query("SELECT * from category_table ORDER BY id ASC")

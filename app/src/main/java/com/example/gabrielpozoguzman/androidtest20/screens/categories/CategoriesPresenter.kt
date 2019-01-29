@@ -24,7 +24,6 @@ class CategoriesPresenter(private val categoriesFetchCategoriesUseCase: FetchCat
 
     override fun onCategoriesFetched(categories: List<Category>) {
         mViewMvc.hideProgressIndication()
-        mViewMvc.bindCategories(categories)
     }
 
     override fun onCategoriesFetchFailed() {

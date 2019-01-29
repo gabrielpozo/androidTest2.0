@@ -1,6 +1,7 @@
 package com.example.gabrielpozoguzman.androidtest20.common.viewmodel
 
 class ResultReporterImp<T> : ResultReporter<T> {
+
     private var _before: (() -> Unit)? = null
     private var _onSuccess: ((data: Result<T>) -> Unit)? = null
     private var _onError: ((errorResult: Result<T>) -> Unit)? = null
@@ -38,6 +39,10 @@ class ResultReporterImp<T> : ResultReporter<T> {
         _finally = finallyBlock
     }
 
+    override fun onErrorCoroutines() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
 }
 
 interface ResultReporter<T> {
@@ -45,4 +50,5 @@ interface ResultReporter<T> {
     fun onSuccess(data: Result<T>)
     fun onError(onError: Result<T>)
     fun finally()
+    fun onErrorCoroutines()
 }

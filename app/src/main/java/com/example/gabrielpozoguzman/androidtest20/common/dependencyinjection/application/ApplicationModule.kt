@@ -1,18 +1,17 @@
 package com.example.gabrielpozoguzman.androidtest20.common.dependencyinjection.application
 
-import android.content.Context
-import com.example.gabrielpozoguzman.androidtest20.common.ScreensNavigator
 import com.example.gabrielpozoguzman.androidtest20.common.coroutines.*
+import com.example.gabrielpozoguzman.androidtest20.common.viewmodel.DefaultCoroutines
 import dagger.Module
 import dagger.Provides
 
 @Module
 class ApplicationModule {
 
-  /*  @Provides
-    fun getScreensNavigator(context: Context): ScreensNavigator {
-        return ScreensNavigator(context)
-    }*/
+    /*  @Provides
+      fun getScreensNavigator(context: Context): ScreensNavigator {
+          return ScreensNavigator(context)
+      }*/
 
     @Provides
     fun getAsyncTaskManager(): AsyncTaskManager {
@@ -29,4 +28,8 @@ class ApplicationModule {
         return DefaultCoroutinesManager()
     }
 
+    @Provides
+    fun getCoroutinesManagerImpl(): DefaultCoroutines {
+        return DefaultCoroutines()
+    }
 }

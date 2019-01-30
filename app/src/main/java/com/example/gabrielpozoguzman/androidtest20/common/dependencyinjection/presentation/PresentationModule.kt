@@ -1,17 +1,33 @@
 package com.example.gabrielpozoguzman.androidtest20.common.dependencyinjection.presentation
 
-import android.content.Context
+import android.support.v4.app.FragmentActivity
+import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
+import com.example.gabrielpozoguzman.androidtest20.common.ScreensNavigator
 import com.example.gabrielpozoguzman.androidtest20.screens.common.ViewMvcFactory
+import dagger.Module
+import dagger.Provides
 
-open class PresentationModule(val mActivity: Context) {
+@Module
+class PresentationModule(val mActivity: FragmentActivity) {
 
+    @Provides
+     fun getFragmentManager(): FragmentManager {
+        return mActivity.supportFragmentManager
+    }
 
+    @Provides
     fun getLayoutInflater(): LayoutInflater {
         return LayoutInflater.from(mActivity)
     }
 
+    @Provides
     fun getViewMvcFactory(layoutInflater: LayoutInflater): ViewMvcFactory {
-        return ViewMvcFactory(layoutInflater) //return getCategoryListItemViewMvcImpl --> CategoryListItemViewMvcImpl(mLayoutInflater, parent, navigationDrawer, getImageLoader())
+        return ViewMvcFactory(layoutInflater)
+    }
+
+    @Provides
+    fun getScreensNavigator(): ScreensNavigator {
+        return ScreensNavigator(mActivity)
     }
 }

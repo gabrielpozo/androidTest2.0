@@ -6,8 +6,8 @@ import kotlin.coroutines.CoroutineContext
 
 class DefaultCoroutines(override val coroutineContext: CoroutineContext = Dispatchers.Main, private val backgroundContext: CoroutineContext = Dispatchers.IO) : CoroutineScope, CoroutinesManager {
 
-    protected val coroutinesJobs: MutableList<Job> = mutableListOf()
-    protected val deferredObjects: MutableList<Deferred<*>> = mutableListOf()
+    private val coroutinesJobs: MutableList<Job> = mutableListOf()
+    private val deferredObjects: MutableList<Deferred<*>> = mutableListOf()
 
     override fun launchOnUI(block: suspend CoroutineScope.() -> Unit) {
         val job: Job = launch { block() }

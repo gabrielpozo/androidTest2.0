@@ -5,7 +5,7 @@ import com.example.gabrielpozoguzman.androidtest20.screens.categorydetails.Categ
 import com.example.gabrielpozoguzman.androidtest20.screens.splash.SplashActivity
 import dagger.Subcomponent
 
-@Subcomponent(modules = arrayOf(CategoriesModule::class, CategoriesDetailsModule::class, SplashModule::class, ViewModelModule::class))
+@Subcomponent(modules = [PresentationModule::class, CategoriesModule::class, CategoriesDetailsModule::class, SplashModule::class, ViewModelModule::class])
 interface PresentationComponent {
 
     fun inject(categories: SplashActivity)

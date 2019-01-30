@@ -16,7 +16,6 @@ class CategoriesDetailsModule {
         return CategoryDetailsPresenter(fetchCategoriesDetailsUseCase, coroutinesManager)
     }
 
-
     @Provides
     fun getFetchCategoryDetailUseCase(categoriesNetworkRepository: CategoriesNetworkRepository): FetchCategoryDetailUseCase {
         return FetchCategoryDetailUseCase(categoriesNetworkRepository)

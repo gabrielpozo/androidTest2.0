@@ -3,10 +3,7 @@ package com.example.gabrielpozoguzman.androidtest20.screens.common.controllers
 import android.support.v7.app.AppCompatActivity
 import com.example.gabrielpozoguzman.androidtest20.CustomApplication
 import com.example.gabrielpozoguzman.androidtest20.common.dependencyinjection.application.ApplicationComponent
-import com.example.gabrielpozoguzman.androidtest20.common.dependencyinjection.presentation.CategoriesDetailsModule
-import com.example.gabrielpozoguzman.androidtest20.common.dependencyinjection.presentation.PresentationComponent
-import com.example.gabrielpozoguzman.androidtest20.common.dependencyinjection.presentation.CategoriesModule
-import com.example.gabrielpozoguzman.androidtest20.common.dependencyinjection.presentation.SplashModule
+import com.example.gabrielpozoguzman.androidtest20.common.dependencyinjection.presentation.*
 
 open class BaseActivity : AppCompatActivity() {
     private var mIsInjectorUsed: Boolean = false
@@ -16,7 +13,7 @@ open class BaseActivity : AppCompatActivity() {
         }
         mIsInjectorUsed = true
         return getApplicationComponent().
-                newPresentationComponent(CategoriesModule(this), CategoriesDetailsModule(), SplashModule())
+                newPresentationComponent(PresentationModule(this))
     }
 
     private fun getApplicationComponent(): ApplicationComponent {

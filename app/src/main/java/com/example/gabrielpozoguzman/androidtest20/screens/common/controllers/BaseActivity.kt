@@ -12,8 +12,7 @@ open class BaseActivity : AppCompatActivity() {
             throw RuntimeException("there is no need to use injector more than once")
         }
         mIsInjectorUsed = true
-        return getApplicationComponent().
-                newPresentationComponent(PresentationModule(this))
+        return getApplicationComponent().newPresentationComponent(PresentationModule(this))
     }
 
     private fun getApplicationComponent(): ApplicationComponent {

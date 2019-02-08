@@ -36,15 +36,15 @@ class SplashActivity : BaseActivity() {
         if (!isFinishing) {
             val intent = Intent(applicationContext, CategoriesActivity::class.java)
             scope.launch {
-                //fetchCategoriesUseCase2.execute()
-                fetchCategoriesUseCase2.execute(onSuccess = {
-                    startActivity(intent)
-                    finish()
+                fetchCategoriesUseCase2.execute {
+                    onSuccess {
+                        startActivity(intent)
+                        finish()
+                    }
+                    onError {
 
-                }, onError = {
-
-                })
-
+                    }
+                }
             }
         }
     }
@@ -64,7 +64,7 @@ class SplashActivity : BaseActivity() {
 
     public override fun onDestroy() {
         mDelayHandler?.removeCallbacks(mRunnable)
-        fetchCategoriesUseCase2.cancelAllCoroutinesManager()
+        // fetchCategoriesUseCase2.cancelAllCoroutinesManager()
         parentJob.cancel()
         super.onDestroy()
     }

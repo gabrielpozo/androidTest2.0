@@ -27,6 +27,10 @@ class CategoriesPresenter(private val categoriesFetchCategoriesUseCase: FetchCat
     }
 
     override fun onCategoriesFetchFailed() {
+        /**
+         * so here we can implement onRetry() since it might not be convenient
+         * to do it on the business model as it might be tightly coupled to the operation onBackground()
+         */
 
     }
 

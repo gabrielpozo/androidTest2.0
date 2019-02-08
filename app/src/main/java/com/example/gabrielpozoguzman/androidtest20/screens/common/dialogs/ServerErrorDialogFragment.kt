@@ -11,7 +11,6 @@ class ServerErrorDialogFragment : DialogFragment() {
         fun onRetryDialogRequest()
     }
 
-
     companion object {
         fun newInstance(): ServerErrorDialogFragment {
             return ServerErrorDialogFragment()

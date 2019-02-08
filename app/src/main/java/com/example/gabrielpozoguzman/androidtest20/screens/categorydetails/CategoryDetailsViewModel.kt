@@ -6,7 +6,6 @@ import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
-import android.util.Log
 import com.example.gabrielpozoguzman.androidtest20.categories.*
 import com.example.gabrielpozoguzman.androidtest20.common.pagelist.CategoriesDataFactory
 import com.example.gabrielpozoguzman.androidtest20.common.pagelist.CategoriesDataSource

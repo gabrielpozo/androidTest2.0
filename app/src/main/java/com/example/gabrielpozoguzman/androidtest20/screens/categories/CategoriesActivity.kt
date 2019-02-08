@@ -2,6 +2,7 @@ package com.example.gabrielpozoguzman.androidtest20.screens.categories
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import com.example.gabrielpozoguzman.androidtest20.categories.Category
@@ -34,6 +35,12 @@ class CategoriesActivity : BaseActivity(), CategoriesViewMvc.Listener, ServerErr
 
         mViewMvc = viewMvcFactory.getCategoriesViewMvc(null)
 
+        initViewModelFields()
+
+        setContentView(mViewMvc.getRootView())
+    }
+
+    private fun initViewModelFields() {
         viewModel.categories.observe(this, Observer {
             it?.getContentIfNotHandled()?.let { categories ->
                 mViewMvc.hideProgressIndication()
@@ -47,7 +54,6 @@ class CategoriesActivity : BaseActivity(), CategoriesViewMvc.Listener, ServerErr
                 mDialogsManager.showDialogWithId(ServerErrorDialogFragment.newInstance(), "")
             }
         })
-        setContentView(mViewMvc.getRootView())
     }
 
     override fun onCategoriesClicked(category: Category) {

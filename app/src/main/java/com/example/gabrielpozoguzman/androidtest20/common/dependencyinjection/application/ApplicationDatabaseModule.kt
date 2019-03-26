@@ -5,6 +5,8 @@ import com.example.gabrielpozoguzman.androidtest20.categories.CategoriesUseRepos
 import com.example.gabrielpozoguzman.androidtest20.common.coroutines.AsyncTaskManager
 import com.example.gabrielpozoguzman.androidtest20.repository.database.CategoriesRoomDatabase
 import com.example.gabrielpozoguzman.androidtest20.repository.database.CategoryDao
+import com.example.gabrielpozoguzman.androidtest20.screens.categorydetails.CategoryDetailsActivity
+import com.example.gabrielpozoguzman.androidtest20.screens.common.controllers.BackPressedDispatcher
 import dagger.Module
 import dagger.Provides
 
@@ -21,5 +23,4 @@ class ApplicationDatabaseModule(val context: Context) {
     fun getCategoriesUseRepository(categoryDao: CategoryDao, asyncTaskManager: AsyncTaskManager): CategoriesUseRepository {
         return CategoriesUseRepository(categoryDao, asyncTaskManager)
     }
-
 }

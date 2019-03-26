@@ -5,5 +5,5 @@ enum class State {
 }
 
 enum class ResultState {
-    SUCCESS, ERROR
+    SUCCESS, ERROR, NETWORK_ERROR
 }

@@ -14,10 +14,21 @@ class CategoryDetailsPresenter(private val fetchCategoryDetailType: FetchCategor
     }
 
     private fun launchCategoryDetails() {
+        /*    val fetc: FetchCategoryDetailUseCase? = null
+            fetc?.execute(null, {
+
+                model ->
+
+            },{
+
+                modelS -> modelS.sp
+
+
+            })*/
         launchOnUITryCatch({
           //  val categoryDetailItems = fetchCategoryDetailType.execute(mViewMvc.categoryId)
             mViewMvc.hideProgressIndication()
-            //mViewMvc.bindCategoriesDetails(categoryDetailItems)
+            //mViewMvc.bindCategoriesDetails(categoryDetailItems)o
         }, {
             mViewMvc.hideProgressIndication()
             mViewMvc.showErrorDialog()

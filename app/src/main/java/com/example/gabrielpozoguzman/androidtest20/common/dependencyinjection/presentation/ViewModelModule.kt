@@ -1,10 +1,12 @@
 package com.example.gabrielpozoguzman.androidtest20.common.dependencyinjection.presentation
 
 import android.arch.lifecycle.ViewModel
+import android.support.v4.app.FragmentActivity
 import com.example.gabrielpozoguzman.androidtest20.common.viewmodel.UseCaseImpl
 import com.example.gabrielpozoguzman.androidtest20.common.viewmodel.ViewModelFactory
 import com.example.gabrielpozoguzman.androidtest20.common.viewmodel.ViewModelImpl
 import com.example.gabrielpozoguzman.androidtest20.repository.CategoriesNetworkRepository
+import com.example.gabrielpozoguzman.androidtest20.screens.categorydetails.CategoryDetailsActivity
 import com.example.gabrielpozoguzman.androidtest20.screens.categorydetails.CategoryDetailsViewModel
 import dagger.MapKey
 import dagger.Module
@@ -32,13 +34,12 @@ class ViewModelModule {
     @ViewModelKey(ViewModelImpl::class)
     fun categoriesViewModel(useCaseImpl: UseCaseImpl): ViewModel {
         return ViewModelImpl(useCaseImpl)
-
     }
 
     @Provides
     @IntoMap
     @ViewModelKey(CategoryDetailsViewModel::class)
-    fun categoriesDetailViewModel(categoriesNetworkRepository: CategoriesNetworkRepository): ViewModel {
-        return CategoryDetailsViewModel(categoriesNetworkRepository)
+    fun categoriesDetailViewModel(categoriesNetworkRepository: CategoriesNetworkRepository, categoriesBackPressedDispatcher: CategoryDetailsActivity): ViewModel {
+        return CategoryDetailsViewModel(categoriesNetworkRepository, categoriesBackPressedDispatcher)
     }
 }

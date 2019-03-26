@@ -4,6 +4,8 @@ import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import com.example.gabrielpozoguzman.androidtest20.common.ScreensNavigator
+import com.example.gabrielpozoguzman.androidtest20.screens.categories.CategoriesActivity
+import com.example.gabrielpozoguzman.androidtest20.screens.categorydetails.CategoryDetailsActivity
 import com.example.gabrielpozoguzman.androidtest20.screens.common.ViewMvcFactory
 import dagger.Module
 import dagger.Provides
@@ -12,7 +14,7 @@ import dagger.Provides
 class PresentationModule(val mActivity: FragmentActivity) {
 
     @Provides
-     fun getFragmentManager(): FragmentManager {
+    fun getFragmentManager(): FragmentManager {
         return mActivity.supportFragmentManager
     }
 
@@ -29,5 +31,15 @@ class PresentationModule(val mActivity: FragmentActivity) {
     @Provides
     fun getScreensNavigator(): ScreensNavigator {
         return ScreensNavigator(mActivity)
+    }
+
+    @Provides
+    fun getCategoryDetailsActivity(): CategoryDetailsActivity {
+        return mActivity as CategoryDetailsActivity
+    }
+
+    @Provides
+    fun getCategoriesActivity(): CategoriesActivity {
+        return mActivity as CategoriesActivity
     }
 }

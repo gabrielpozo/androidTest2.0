@@ -11,8 +11,10 @@ import com.example.gabrielpozoguzman.androidtest20.common.pagelist.CategoriesDat
 import com.example.gabrielpozoguzman.androidtest20.common.pagelist.CategoriesDataSource
 import com.example.gabrielpozoguzman.androidtest20.common.pagelist.State
 import com.example.gabrielpozoguzman.androidtest20.repository.CategoriesNetworkRepository
+import com.example.gabrielpozoguzman.androidtest20.screens.common.controllers.BackPressedDispatcher
+import com.example.gabrielpozoguzman.androidtest20.screens.common.controllers.BackPressedListener
 
-class CategoryDetailsViewModel(private val categoriesNetworkRepository: CategoriesNetworkRepository) : ViewModel() {
+class CategoryDetailsViewModel(private val categoriesNetworkRepository: CategoriesNetworkRepository, private val backPressedDispatcher: BackPressedDispatcher) : ViewModel(), BackPressedListener {
 
     private val queryLiveData = MutableLiveData<String>()
     private val config: PagedList.Config = PagedList.Config.Builder()
@@ -42,6 +44,19 @@ class CategoryDetailsViewModel(private val categoriesNetworkRepository: Categori
     fun loadCategoriesDataNow(categoryId: String) {
         dataSourceFactory = CategoriesDataFactory(categoriesNetworkRepository, categoryId)
         queryLiveData.postValue(categoryId)
+    }
+
+    override fun onBackPressed(): Boolean {
+        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return false
+    }
+
+    fun onStart() {
+        backPressedDispatcher.unRegisterListener(this)
+    }
+
+    fun onStop() {
+        backPressedDispatcher.unRegisterListener(this)
     }
 
 }

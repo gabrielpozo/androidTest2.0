@@ -22,8 +22,6 @@ class CategorySlidePageFragment : BaseFragment() {
 
     @Inject
     lateinit var viewMvcFactory: ViewMvcFactory
-/*    @Inject
-    lateinit var mBackPressedDispatcher: BackPressedDispatcher*/
 
     lateinit var mViewMvc: CategoriesDetailsViewMvc
     lateinit var categoryName: CategoryDetailEnum
@@ -47,10 +45,7 @@ class CategorySlidePageFragment : BaseFragment() {
 
         getPresentationComponent().inject(this)
         mViewMvc = viewMvcFactory.getCategoryDetailsViewMvc(parent)
-
         viewModel.loadCategoriesDataNow(getCategoryDetailArgument())
-        Log.d("GabrielS", "let's see whats the value of the viewModel or this on BackPressed $this")
-
         viewModel.categoriesList.observe(this, Observer<PagedList<CategoryDetailType>> { categories ->
             categories?.let {
                 mViewMvc.bindCategoriesDetails(it)

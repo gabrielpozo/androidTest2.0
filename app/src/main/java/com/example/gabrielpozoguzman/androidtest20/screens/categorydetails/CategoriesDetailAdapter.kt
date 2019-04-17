@@ -28,6 +28,7 @@ class CategoriesDetailAdapter(val parent: LayoutInflater, private val viewMvcFac
                 else -> TYPE_BOOK
             }
         }
+        return 0
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = when (viewType) {

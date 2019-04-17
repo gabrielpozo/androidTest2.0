@@ -25,7 +25,6 @@ class UseCaseImpl2Test {
     // endregion constants
 
     // region helper fields
-    private val coroutinesManager: DefaultCoroutines = DefaultCoroutines()
     private val mobgenApiMock: MobgenApi = mock()
     //end region helper fields
 
@@ -73,7 +72,7 @@ class UseCaseImpl2Test {
     // fetchCategories - fails - categories equal null
 
     @Test
-    fun fetchCategories_fails_nullCategories() {
+    fun fetchCategories_networkFails_nullCategories() {
         //arrange
         general_error()
 
@@ -83,31 +82,22 @@ class UseCaseImpl2Test {
         assertThat(result.data, `is`(nullValue()))
     }
 
-    // fetchCategories - network fails - network error returned
+    // fetchCategories - network fails - network error returned -  code returned( 500 )
     @Test
-    fun fetchCategories_networkFails_netWorkErrorReturned() {
+    fun fetchCategories_networkfails_networkErrorReturned() {
         //arrange
-        netWork_error()
-
+        networkError()
+        //act
         SUT.fetchCategories {
             result = it
         }
-        assertThat(result.data, `is`(nullValue()))
-    }
-// fetch Categories - network fails - categories null
-
-    @Test
-    fun fetchCategories_networkFails_nullCategoriesReturned() {
-        //arrange
-        netWork_error()
-
-        SUT.fetchCategories {
-            result = it
-        }
+        //assertion¬
         assertThat(result.resultState, `is`(ResultState.NETWORK_ERROR))
     }
 
+    // fetch Categories - network fails - categories null
 
+    /****/
     // region helper methods
     private fun success() {
         var call: Call<List<Category>> = mock()
@@ -116,18 +106,21 @@ class UseCaseImpl2Test {
         `when`(call.execute()).thenReturn(response)
     }
 
-    private fun general_error() {
+
+    private fun networkError() {
         val call: Call<List<Category>> = mock()
         val responseBody: ResponseBody = ResponseBody.create(MediaType.parse("string"), "contentType")
-        val response: Response<List<Category>> = Response.error(404, responseBody)
+        //we assume it can be any error code except 500
+        val response: Response<List<Category>> = Response.error(500, responseBody)
         `when`(mobgenApiMock.getCategories()).thenReturn(call)
         `when`(call.execute()).thenReturn(response)
     }
 
-    private fun netWork_error() {
+    private fun general_error() {
         val call: Call<List<Category>> = mock()
         val responseBody: ResponseBody = ResponseBody.create(MediaType.parse("string"), "contentType")
-        val response: Response<List<Category>> = Response.error(500, responseBody)
+        //we assume it can be any error code except 500
+        val response: Response<List<Category>> = Response.error(404, responseBody)
         `when`(mobgenApiMock.getCategories()).thenReturn(call)
         `when`(call.execute()).thenReturn(response)
     }

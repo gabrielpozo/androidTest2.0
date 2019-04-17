@@ -2,7 +2,6 @@ package com.example.gabrielpozoguzman.androidtest20.screens.categories
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import com.example.gabrielpozoguzman.androidtest20.categories.Category

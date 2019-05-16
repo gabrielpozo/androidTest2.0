@@ -41,7 +41,9 @@ class CategorySlidePageFragment : BaseFragment() {
         getPresentationComponent().inject(this)
         mViewMvc = viewMvcFactory.getCategoryDetailsViewMvc(parent)
         mViewMvc.showProgressIndication()
+
         viewModel.loadCategoriesDataNow(getCategoryDetailArgument())
+
         viewModel.categoriesList.observe(this, Observer<PagedList<CategoryDetailType>> { categories ->
             categories?.let {
                 mViewMvc.hideProgressIndication()
@@ -54,6 +56,12 @@ class CategorySlidePageFragment : BaseFragment() {
         })
 
         return mViewMvc.getRootView()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        //TODO update UI when it has been on
+        viewModel.loadCategoriesDataNow(getCategoryDetailArgument())
     }
 
     private fun getCategoryDetailArgument(): String {

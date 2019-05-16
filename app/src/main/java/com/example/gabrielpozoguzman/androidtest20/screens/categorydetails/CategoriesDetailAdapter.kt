@@ -3,7 +3,6 @@ package com.example.gabrielpozoguzman.androidtest20.screens.categorydetails
 import android.arch.paging.PagedListAdapter
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.ViewHolder
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.gabrielpozoguzman.androidtest20.categories.*
@@ -33,7 +32,6 @@ class CategoriesDetailAdapter(val parent: LayoutInflater, private val viewMvcFac
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = when (viewType) {
         TYPE_BOOK -> {
-            Log.d("GabrielH","onCreateViewHolder on Book Holder")
             BookViewHolder(viewMvcFactory.getCategoryBookItemImpl(parent))
         }
         TYPE_HOUSE -> HouseViewHolder(viewMvcFactory.getCategoryHouseItemImpl(parent))

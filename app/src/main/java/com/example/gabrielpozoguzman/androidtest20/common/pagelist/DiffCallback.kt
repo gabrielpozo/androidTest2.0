@@ -4,7 +4,7 @@ import android.support.v7.util.DiffUtil
 import com.example.gabrielpozoguzman.androidtest20.categories.CategoryDetailType
 
 
-class CategoriesDiffUtil(private val oldList: List<CategoryDetailType>, private val newList: List<CategoryDetailType>) : DiffUtil.Callback() {
+/*class CategoriesDiffUtil(private val oldList: List<CategoryDetailType>, private val newList: List<CategoryDetailType>) : DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return oldList.size
     }
@@ -22,7 +22,7 @@ class CategoriesDiffUtil(private val oldList: List<CategoryDetailType>, private 
     }
 
 
-}
+}*/
 
 val diffCallback = object : DiffUtil.ItemCallback<CategoryDetailType>() {
 
@@ -31,7 +31,7 @@ val diffCallback = object : DiffUtil.ItemCallback<CategoryDetailType>() {
     lateinit var newList: List<CategoryDetailType>
 
     override fun areItemsTheSame(oldItem: CategoryDetailType, newItem: CategoryDetailType): Boolean {
-        return oldItem
+        return true
     }
 
     override fun areContentsTheSame(oldItem: CategoryDetailType, newItem: CategoryDetailType): Boolean {

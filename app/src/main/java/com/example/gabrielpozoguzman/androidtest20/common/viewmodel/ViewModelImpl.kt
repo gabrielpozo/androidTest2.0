@@ -9,38 +9,13 @@ import com.example.gabrielpozoguzman.androidtest20.categories.Category
 import kotlin.Exception
 
 class ViewModelImpl(private val useCaseImpl: UseCaseImpl) : ViewModel() {
-
-    private val onResultLiveData: MutableLiveData<Result<List<Category>>> = MutableLiveData()
-    private val onNetworkErrorLiveData: MutableLiveData<Result<List<Category>>> = MutableLiveData()
-
-    fun searchCategoriesOnNetwork() {
-        useCaseImpl.execute {
-            onSuccess {
-                onResultLiveData.postValue(it)
-            }
-
-            onError {
-                onNetworkErrorLiveData.postValue(it)
-            }
-        }
-    }
-
-    val categories: LiveData<Event<List<Category>?>> = Transformations.map(onResultLiveData) {
-        it?.let { result ->
-            Event(result.data)
-        }
-    }
-
-    val networkErrors: LiveData<Event<Exception?>> = Transformations.map(onNetworkErrorLiveData) {
-        it?.let { networkResult ->
-            Event(networkResult.networkErrors)
-        }
-
+    fun getAllCategories(): LiveData<List<Category>> {
+        return useCaseImpl.getCategories()
     }
 
     override fun onCleared() {
         super.onCleared()
-        Log.d("GabrielC", "onCleared!!")
+        useCaseImpl.clear()
     }
 
 }

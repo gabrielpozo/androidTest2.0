@@ -6,11 +6,12 @@ import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
+import android.util.Log
 import com.example.gabrielpozoguzman.androidtest20.categories.*
 import com.example.gabrielpozoguzman.androidtest20.common.pagelist.CategoriesDataFactory
 import com.example.gabrielpozoguzman.androidtest20.common.pagelist.CategoriesDataSource
 import com.example.gabrielpozoguzman.androidtest20.common.pagelist.State
-import com.example.gabrielpozoguzman.androidtest20.repository.CategoriesNetworkRepository
+import com.example.gabrielpozoguzman.androidtest20.repositories.CategoriesNetworkRepository
 import com.example.gabrielpozoguzman.androidtest20.screens.common.controllers.BackPressedDispatcher
 import com.example.gabrielpozoguzman.androidtest20.screens.common.controllers.BackPressedListener
 
@@ -24,6 +25,7 @@ class CategoryDetailsViewModel(private val categoriesNetworkRepository: Categori
             .build()
 
     private lateinit var dataSourceFactory: CategoriesDataFactory
+
 
     /**
      * this variables will be observed from the activity/fragment
@@ -42,21 +44,19 @@ class CategoryDetailsViewModel(private val categoriesNetworkRepository: Categori
      * Search a repository based on a query string Id.
      */
     fun loadCategoriesDataNow(categoryId: String) {
-        dataSourceFactory = CategoriesDataFactory(categoriesNetworkRepository, categoryId)
-        queryLiveData.postValue(categoryId)
+        if (queryLiveData.value == null) {
+            dataSourceFactory = CategoriesDataFactory(categoriesNetworkRepository, categoryId)
+            queryLiveData.postValue(categoryId)
+        }
     }
 
     override fun onBackPressed(): Boolean {
-        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates., implements from data binding
         return false
     }
 
-    fun onStart() {
-        backPressedDispatcher.unRegisterListener(this)
-    }
-
-    fun onStop() {
-        backPressedDispatcher.unRegisterListener(this)
+    override fun onCleared() {
+        super.onCleared()
     }
 
 }

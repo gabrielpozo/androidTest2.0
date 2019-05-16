@@ -4,7 +4,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.PageKeyedDataSource
 import android.util.Log
 import com.example.gabrielpozoguzman.androidtest20.categories.CategoryDetailType
-import com.example.gabrielpozoguzman.androidtest20.repository.CategoriesNetworkRepository
+import com.example.gabrielpozoguzman.androidtest20.repositories.CategoriesNetworkRepository
 
 class CategoriesDataSource(private val categoriesNetworkRepository: CategoriesNetworkRepository,
                            val categoryId: String) : PageKeyedDataSource<Int, CategoryDetailType>() {
@@ -13,7 +13,6 @@ class CategoriesDataSource(private val categoriesNetworkRepository: CategoriesNe
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, CategoryDetailType>) {
         val key = params.requestedLoadSize
-        Log.d("GabrielDS", "loadInitial; $key and categoryId $categoryId and request Load Size:")
         categoriesNetworkRepository.getCategoryDetailsList(1.toString(), categoryId, {
             callback.onResult(it, null, 2)
         }, {
@@ -23,7 +22,6 @@ class CategoriesDataSource(private val categoriesNetworkRepository: CategoriesNe
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, CategoryDetailType>) {
         val nextKey = params.key
-        Log.d("GabrielDS", "loadAfter; $nextKey and categoryId $categoryId")
         categoriesNetworkRepository.getCategoryDetailsList(nextKey.toString(), categoryId, {
             callback.onResult(it, nextKey + 1)
         }, {

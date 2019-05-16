@@ -68,10 +68,11 @@ class FragmentFrameHelper(val activity: FragmentActivity, val mFragmentFrameWrap
         // it there wasn't, then it will be added indeed
         ft.replace(getFragmentId(), newFragment, null)
 
-        if (mFragmentManager.isStateSaved) {//it means the activity is on save and restore flow -- the host already saved the state of the fragment Manager --> -> it is under rotation for example
+        if (mFragmentManager.isStateSaved) {//it means the activity is on save and restore flow
+            // -- the host already saved the state of the fragment Manager --> -> it is under rotation for example
             // no operation should not be performed here because it might throw an exception if we commit here
             // BUT with the method below we avoid exceptions
-            ft.commitAllowingStateLoss()// it wont be commit anything if it happens after onStop()
+            ft.commitAllowingStateLoss()// it won't commit anything if it happens after onStop()
         } else {
             ft.commit()
         }

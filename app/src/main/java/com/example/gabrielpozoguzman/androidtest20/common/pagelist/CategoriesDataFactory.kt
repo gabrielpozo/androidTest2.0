@@ -3,7 +3,7 @@ package com.example.gabrielpozoguzman.androidtest20.common.pagelist
 import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.DataSource
 import com.example.gabrielpozoguzman.androidtest20.categories.CategoryDetailType
-import com.example.gabrielpozoguzman.androidtest20.repository.CategoriesNetworkRepository
+import com.example.gabrielpozoguzman.androidtest20.repositories.CategoriesNetworkRepository
 
 class CategoriesDataFactory(private val categoriesNetworkRepository: CategoriesNetworkRepository, val categoryId: String) : DataSource.Factory<Int, CategoryDetailType>() {
 

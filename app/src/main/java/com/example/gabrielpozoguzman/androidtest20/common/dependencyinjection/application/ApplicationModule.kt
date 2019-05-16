@@ -1,7 +1,7 @@
 package com.example.gabrielpozoguzman.androidtest20.common.dependencyinjection.application
 
 import com.example.gabrielpozoguzman.androidtest20.common.coroutines.*
-import com.example.gabrielpozoguzman.androidtest20.common.viewmodel.DefaultCoroutines
+import com.example.gabrielpozoguzman.androidtest20.common.viewmodel.DefaultCoroutinesViewModel
 import dagger.Module
 import dagger.Provides
 
@@ -23,13 +23,9 @@ class ApplicationModule {
         return CoroutineScopeCategoryDetails()
     }
 
-    @Provides
-    fun getCoroutinesManager(): CoroutinesManager {
-        return DefaultCoroutinesManager()
-    }
 
     @Provides
-    fun getCoroutinesManagerImpl(): DefaultCoroutines {
-        return DefaultCoroutines()
+    fun getCoroutinesManagerImpl(): DefaultCoroutinesViewModel {
+        return DefaultCoroutinesViewModel()
     }
 }

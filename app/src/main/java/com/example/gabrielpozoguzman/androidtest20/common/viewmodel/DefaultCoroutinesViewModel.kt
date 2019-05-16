@@ -4,7 +4,7 @@ import com.example.gabrielpozoguzman.androidtest20.utils.CoroutinesUtils.Compani
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class DefaultCoroutines(override val coroutineContext: CoroutineContext = Dispatchers.Main, private val backgroundContext: CoroutineContext = Dispatchers.IO) : CoroutineScope, CoroutinesManager {
+class DefaultCoroutinesViewModel(override val coroutineContext: CoroutineContext = Dispatchers.Main, private val backgroundContext: CoroutineContext = Dispatchers.IO) : CoroutineScope, CoroutinesManagerViewModel {
 
     private val coroutinesJobs: MutableList<Job> = mutableListOf()
     private val deferredObjects: MutableList<Deferred<*>> = mutableListOf()

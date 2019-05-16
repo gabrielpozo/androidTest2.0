@@ -1,4 +1,4 @@
-package com.example.gabrielpozoguzman.androidtest20.repository.database
+package com.example.gabrielpozoguzman.androidtest20.repositories.database
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room

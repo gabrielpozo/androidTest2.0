@@ -3,10 +3,8 @@ package com.example.gabrielpozoguzman.androidtest20.common.dependencyinjection.a
 import android.content.Context
 import com.example.gabrielpozoguzman.androidtest20.categories.CategoriesUseRepository
 import com.example.gabrielpozoguzman.androidtest20.common.coroutines.AsyncTaskManager
-import com.example.gabrielpozoguzman.androidtest20.repository.database.CategoriesRoomDatabase
-import com.example.gabrielpozoguzman.androidtest20.repository.database.CategoryDao
-import com.example.gabrielpozoguzman.androidtest20.screens.categorydetails.CategoryDetailsActivity
-import com.example.gabrielpozoguzman.androidtest20.screens.common.controllers.BackPressedDispatcher
+import com.example.gabrielpozoguzman.androidtest20.repositories.database.CategoriesRoomDatabase
+import com.example.gabrielpozoguzman.androidtest20.repositories.database.CategoryDao
 import dagger.Module
 import dagger.Provides
 

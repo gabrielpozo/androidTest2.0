@@ -10,7 +10,7 @@ import kotlinx.coroutines.delay
  * since they are pointing to their abstraction and not to their implementation.
  * clients doesn't need to know about their implementation
  */
-abstract class BaseUseCase2<P, T>(coroutinesManager: DefaultCoroutines) : CoroutinesManager by coroutinesManager {
+abstract class BaseUseCase2<P, T>(coroutinesManager: DefaultCoroutinesViewModel) : CoroutinesManagerViewModel by coroutinesManager {
     private var resultReporter = ResultReporterImp<T>()
     private val maxValue = 16000L
 

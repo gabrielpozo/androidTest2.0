@@ -1,4 +1,4 @@
-package com.example.gabrielpozoguzman.androidtest20.repository.database
+package com.example.gabrielpozoguzman.androidtest20.repositories.database
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
@@ -9,7 +9,7 @@ import com.example.gabrielpozoguzman.androidtest20.categories.Category
 
 @Dao
 interface CategoryDao {
-    @Query("SELECT * from category_table ORDER BY id ASC")
+    @Query("SELECT * from category_table ORDER BY title ASC")
     fun getAllCategories(): LiveData<List<Category>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

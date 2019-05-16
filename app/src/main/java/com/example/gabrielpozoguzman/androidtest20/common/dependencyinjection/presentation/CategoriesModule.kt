@@ -1,12 +1,11 @@
 package com.example.gabrielpozoguzman.androidtest20.common.dependencyinjection.presentation
 
 import android.support.v4.app.FragmentManager
+import com.example.gabrielpozoguzman.androidtest20.categories.CategoriesUseRepository
 import com.example.gabrielpozoguzman.androidtest20.categories.FetchCategoriesUseCase
 import com.example.gabrielpozoguzman.androidtest20.common.ScreensNavigator
 import com.example.gabrielpozoguzman.androidtest20.common.coroutines.*
-import com.example.gabrielpozoguzman.androidtest20.common.viewmodel.DefaultCoroutines
 import com.example.gabrielpozoguzman.androidtest20.common.viewmodel.UseCaseImpl
-import com.example.gabrielpozoguzman.androidtest20.networking.MobgenApi
 import com.example.gabrielpozoguzman.androidtest20.screens.categories.CategoriesPresenter
 import com.example.gabrielpozoguzman.androidtest20.screens.common.dialogs.DialogsManager
 import dagger.Module
@@ -20,8 +19,8 @@ class CategoriesModule {
     }
 
     @Provides
-    fun getUseCaseImpl(mobgenApi: MobgenApi, coroutines: DefaultCoroutines): UseCaseImpl {
-        return UseCaseImpl(mobgenApi, coroutines)
+    fun getUseCaseImpl(categoriesRepository: CategoriesUseRepository): UseCaseImpl {
+        return UseCaseImpl(categoriesRepository)
     }
 
     @Provides

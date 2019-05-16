@@ -5,6 +5,7 @@ class ResultReporterImp<T> : ResultReporter<T> {
     private var _before: (() -> Unit)? = null
     private var _onSuccess: ((data: Result<T>) -> Unit)? = null
     private var _onError: ((errorResult: Result<T>) -> Unit)? = null
+    private var _onErrorCoroutine: (() -> Unit)? = null
     private var _finally: (() -> Unit)? = null
 
     override fun beforeResult() {
@@ -40,9 +41,12 @@ class ResultReporterImp<T> : ResultReporter<T> {
     }
 
     override fun onErrorCoroutines() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        _onErrorCoroutine?.invoke()
     }
 
+    fun onErrorCoroutines(errorBlock: () -> Unit) {
+        _onErrorCoroutine = errorBlock
+    }
 }
 
 interface ResultReporter<T> {

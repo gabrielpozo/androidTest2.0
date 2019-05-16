@@ -1,17 +1,15 @@
 package com.example.gabrielpozoguzman.androidtest20.common.viewmodel
 
+import android.arch.lifecycle.LiveData
+import com.example.gabrielpozoguzman.androidtest20.categories.CategoriesUseRepository
 import com.example.gabrielpozoguzman.androidtest20.categories.Category
 import com.example.gabrielpozoguzman.androidtest20.common.pagelist.ResultState
 import com.example.gabrielpozoguzman.androidtest20.networking.MobgenApi
 import java.lang.Exception
 
-class UseCaseImpl(private val mobgenApi: MobgenApi, coroutinesManager: DefaultCoroutines) : BaseUseCase2<Unit?, List<Category>>(coroutinesManager) {
+class UseCaseImpl(private val categoriesRepository: CategoriesUseRepository) {
+    fun getCategories(): LiveData<List<Category>> = categoriesRepository.allCategories
+    fun clear() {
 
-    override suspend fun doInBackground(params: Unit?): Result<List<Category>> {
-        val response = mobgenApi.getCategoriesImpl().execute()
-        if (response.isSuccessful) {
-            return Result(resultState = ResultState.SUCCESS, data = response.body())
-        }
-        return Result(resultState = ResultState.ERROR, networkErrors = Exception(response.errorBody().toString()))
     }
 }

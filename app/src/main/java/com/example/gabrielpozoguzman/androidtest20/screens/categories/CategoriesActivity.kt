@@ -12,6 +12,7 @@ import com.example.gabrielpozoguzman.androidtest20.screens.common.dialogs.Dialog
 import com.example.gabrielpozoguzman.androidtest20.screens.common.ViewMvcFactory
 import com.example.gabrielpozoguzman.androidtest20.screens.common.controllers.BaseActivity
 import com.example.gabrielpozoguzman.androidtest20.screens.common.dialogs.ServerErrorDialogFragment
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class CategoriesActivity : BaseActivity(), CategoriesViewMvc.Listener, ServerErrorDialogFragment.Listener {
@@ -31,44 +32,47 @@ class CategoriesActivity : BaseActivity(), CategoriesViewMvc.Listener, ServerErr
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getPresentationComponent().inject(this)
-
         mViewMvc = viewMvcFactory.getCategoriesViewMvc(null)
-
         initViewModelFields()
-
         setContentView(mViewMvc.getRootView())
     }
 
     private fun initViewModelFields() {
-        viewModel.categories.observe(this, Observer {
-            it?.getContentIfNotHandled()?.let { categories ->
+        viewModel.getAllCategories().observe(this, Observer {
+            it?.let {
+                Log.d("GabrielLife", "initViewModelsFields")
+                //Thread.sleep(10000)
                 mViewMvc.hideProgressIndication()
-                mViewMvc.bindCategories(categories)
-            }
-        })
-
-        viewModel.networkErrors.observe(this, Observer {
-            it?.getContentIfNotHandled()?.let {
-                mViewMvc.hideProgressIndication()
-                mDialogsManager.showDialogWithId(ServerErrorDialogFragment.newInstance(), "")
+                mViewMvc.bindCategories(it)
             }
         })
     }
+    /* viewModel.g.observe(this, Observer {
+     it?.getContentIfNotHandled()?.let { categories ->
+         mViewMvc.hideProgressIndication()
+         mViewMvc.bindCategories(categories)
+     }
+ })
+
+
+viewModel.networkErrors.observe(this, Observer {
+     it?.getContentIfNotHandled()?.let {
+         mViewMvc.hideProgressIndication()
+         mDialogsManager.showDialogWithId(ServerErrorDialogFragment.newInstance(), "")
+     }
+ })*/
 
     override fun onCategoriesClicked(category: Category) {
         screensNavigator.toCategoriesDetails(category.id)
     }
 
     override fun onRetryDialogRequest() {
-        viewModel.searchCategoriesOnNetwork()
+        //   viewModel.searchCategoriesOnNetwork()
     }
 
     override fun onStart() {
         super.onStart()
         mViewMvc.registerListener(this)
-        mViewMvc.showProgressIndication()
-        viewModel.searchCategoriesOnNetwork()
-
     }
 
     override fun onStop() {

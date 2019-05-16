@@ -60,8 +60,7 @@ class CategorySlidePageFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
-        //TODO update UI when it has been on
-        viewModel.loadCategoriesDataNow(getCategoryDetailArgument())
+
     }
 
     private fun getCategoryDetailArgument(): String {

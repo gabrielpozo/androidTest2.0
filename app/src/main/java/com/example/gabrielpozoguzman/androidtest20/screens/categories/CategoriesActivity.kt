@@ -40,7 +40,6 @@ class CategoriesActivity : BaseActivity(), CategoriesViewMvc.Listener, ServerErr
     private fun initViewModelFields() {
         viewModel.getAllCategories().observe(this, Observer {
             it?.let {
-                Log.d("GabrielLife", "initViewModelsFields")
                 //Thread.sleep(10000)
                 mViewMvc.hideProgressIndication()
                 mViewMvc.bindCategories(it)
